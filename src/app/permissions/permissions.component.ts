@@ -36,6 +36,6 @@ export class PermissionsComponent {
     }
 
     editUserRoles(userId) {
-        console.log('editing user roles');
+        console.log('editing user roles', userId);
     }
 }
