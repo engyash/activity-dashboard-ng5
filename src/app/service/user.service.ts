@@ -2,7 +2,7 @@
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-
+import _ from 'lodash';
 
 @Injectable()
 export class UserService {
@@ -63,8 +63,8 @@ export class UserService {
     }
 
 
-    getUsers() {
-        return this.users;
+    getUsers(roleId) {
+        return _.filter(this.users, { roles: [{ id: roleId }] });
     }
 
     getRoles() {

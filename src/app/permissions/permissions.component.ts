@@ -9,15 +9,29 @@ import { UserService } from './../service';
   styleUrls: ['./permissions.component.scss']
 })
 export class PermissionsComponent {
+    title = 'Training';
+    roles: any = [];
     users: any = [];
 
     constructor(private userService: UserService) {
-        this.getUsers();   
+
+        this.getRoles();
     }
 
-    getUsers() {
-        this.users = this.userService.getUsers();
+    getRoles() {
+        this.roles = this.userService.getRoles();
+        console.log('this.roles', this.roles);
+
+        // get users for default admin role
+        this.getUsers(this.roles[0].id);   
+    }
+
+    getUsers(roleId) {
+        this.users = this.userService.getUsers(roleId);
         console.log('this.users', this.users);
     }
 
+    editUserRoles(userId) {
+        console.log('editing user roles');
+    }
 }
