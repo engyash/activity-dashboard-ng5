@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as c3 from 'c3';
 
 import { UserService } from './../../../../services';
 
@@ -19,10 +20,29 @@ export class LoginActivityComponent implements OnInit {
     }
 
     ngOnInit() {
-        var userId = this.route.snapshot.params['userId'];
-        console.log('userId',userId);
+        var userId = this.route.snapshot.params['userId'];        
         this.getUserDetails(userId);
-        this.getRoles();   
+        this.getRoles(); 
+
+        let chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                xs: {
+                    'data1': 'x1'
+                },
+                columns: [
+                    ['x1', 10, 30, 45, 50, 70, 100],
+                    ['data1', 30, 200, 100, 400, 150, 250]
+                ],
+                type:'bar'
+                //columns: [
+                //    ['visits', 250],
+                //    ['login', 100],
+                //    ['ok', 50]
+                //],
+                //type:'bar'
+            }
+        });
     }
 
     getRoles() {
