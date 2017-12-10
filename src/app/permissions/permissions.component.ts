@@ -12,6 +12,7 @@ export class PermissionsComponent {
     title = 'Training';
     roles: any = [];
     users: any = [];
+    selectedRoleId: string = undefined;
 
     constructor(private userService: UserService) {
 
@@ -20,15 +21,18 @@ export class PermissionsComponent {
 
     getRoles() {
         this.roles = this.userService.getRoles();
-        console.log('this.roles', this.roles);
-
-        // get users for default admin role
-        this.getUsers(this.roles[0].id);   
+        
+        // get all users by default
+        this.getUsers();   
     }
 
-    getUsers(roleId) {
+    getUsers(roleId = undefined) {
         this.users = this.userService.getUsers(roleId);
-        console.log('this.users', this.users);
+    }
+
+    selectRole(roleId) {
+        this.selectedRoleId = roleId;
+        this.getUsers(roleId);
     }
 
     editUserRoles(userId) {

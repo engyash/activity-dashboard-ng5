@@ -63,8 +63,11 @@ export class UserService {
     }
 
 
-    getUsers(roleId) {
-        return _.filter(this.users, { roles: [{ id: roleId }] });
+    getUsers(roleId = undefined) {
+        if (!roleId)
+          return this.users;            
+        else 
+            return _.filter(this.users, { roles: [{ id: roleId }] });
     }
 
     getRoles() {

@@ -8,12 +8,13 @@
     <ul>
      <li>
        <label class="radio">
-         <input value="0" type="radio" name="role">All
+         <input type="radio" name="role" (click)="selectRole()"
+                [(ngModel)]="selectedRoleId"
+                >All
        </label>
      </li>
       <li *ngFor="let role of roles">
-               
-        <label class="radio">
+        <label class="radio" (click)="selectRole(role.id)">
           <input value="{{role.id}}" type="radio" name="role">{{role.name}}
         </label>
         
