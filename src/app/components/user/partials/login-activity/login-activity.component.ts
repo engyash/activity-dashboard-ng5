@@ -1,8 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import * as c3 from 'c3';
-
-import { UserService } from './../../../../services';
 
 
 @Component({
@@ -11,45 +8,43 @@ import { UserService } from './../../../../services';
   styleUrls: ['./login-activity.component.scss']
 })
 export class LoginActivityComponent implements OnInit {    
-    user: any = {};
-    roles: any = [];
 
-    constructor(private userService: UserService, private route: ActivatedRoute) {
-
-
-    }
+    constructor() { }
 
     ngOnInit() {
-        var userId = this.route.snapshot.params['userId'];        
-        this.getUserDetails(userId);
-        this.getRoles(); 
+        this.loadChart();
+    }
 
-        let chart = c3.generate({
-            bindto: '#chart',
-            data: {
-                xs: {
-                    'data1': 'x1'
+    loadChart() {
+        var myData: any = {};
+        myData.x = 'x';
+        myData.xFormat = "%Y-%m-%d";
+        myData.type = 'bar';
+        var myX: any = ["2017-11-20", "2017-11-21", "2017-11-22", "2017-11-23", "2017-11-24"];
+        var myY: any = [2, 4, 1, 7, 3];
+        myX.splice(0, 0, 'x');
+        myY.splice(0, 0, 'Visits');
+        myData.columns = [];
+        myData.columns.push(myX);
+        myData.columns.push(myY);
+        var chart = c3.generate({
+            bindto: '#activity-chart',
+            data: myData,
+            bar: {
+                width: {
+                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                }
+
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: "%Y-%m-%d"
+                    }
                 },
-                columns: [
-                    ['x1', 10, 30, 45, 50, 70, 100],
-                    ['data1', 30, 200, 100, 400, 150, 250]
-                ],
-                type:'bar'
-                //columns: [
-                //    ['visits', 250],
-                //    ['login', 100],
-                //    ['ok', 50]
-                //],
-                //type:'bar'
+
             }
         });
-    }
-
-    getRoles() {
-        this.roles = this.userService.getRoles();
-    }
-
-    getUserDetails(userId) {
-        this.user = this.userService.getUser(userId);
     }
 }
