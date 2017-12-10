@@ -11,31 +11,16 @@ import { UserService } from './../../services';
 })
 export class UserComponent implements OnInit {    
     user: any = {};
-    roles: any = [];
 
-    constructor(private userService: UserService, private route: ActivatedRoute) {
-
-
-    }
+    constructor(private route: ActivatedRoute,
+                private userService: UserService) { }
 
     ngOnInit() {
         var userId=this.route.snapshot.params['userId'];
-
         this.getUserDetails(userId);
-        this.getRoles();   
-    }
-
-    getRoles() {
-        this.roles = this.userService.getRoles();
     }
 
     getUserDetails(userId) {
         this.user = this.userService.getUser(userId);
-    }
-
-
-
-    editRole(userId) {
-        console.log('editing user role', userId);
     }
 }
