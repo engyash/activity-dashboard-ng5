@@ -62,6 +62,9 @@ export class UserService {
 
     }
 
+    getUser(userId) {
+        return _.filter(this.users, { id: userId })[0];
+    }
 
     getUsers(roleId = undefined) {
         if (!roleId)

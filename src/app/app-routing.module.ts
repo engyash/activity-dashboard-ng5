@@ -1,11 +1,14 @@
-﻿import {Routes, RouterModule} from '@angular/router';
-import { PermissionsComponent } from './permissions/permissions.component';
+﻿
+import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
 
-import {NgModule} from '@angular/core';
+import { PermissionsComponent } from './components/permissions/permissions.component';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [  
 
-    { path: '', component: PermissionsComponent}
+    { path: '', component: PermissionsComponent },
+    { path: 'user/:userId', component: UserComponent }
  
 ];
 

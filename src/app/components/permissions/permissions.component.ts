@@ -1,10 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { UserService } from './../service';
+import { UserService } from './../../services';
 
 
 @Component({
-  selector: 'app-permissions',
+  selector: 'permissions',
   templateUrl: './permissions.component.html',
   styleUrls: ['./permissions.component.scss']
 })
@@ -14,7 +15,7 @@ export class PermissionsComponent {
     users: any = [];
     selectedRoleId: string = undefined;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private router: Router) {
 
         this.getRoles();
     }
@@ -37,5 +38,6 @@ export class PermissionsComponent {
 
     editUserRoles(userId) {
         console.log('editing user roles', userId);
+        this.router.navigate(['/user',userId]);
     }
 }
